@@ -4,7 +4,7 @@ import { addNewComment } from '../../api/comments';
 import { deletePost, updatePost } from '../../api/posts';
 import { LoadSelectedPostAction, Reload } from '../../store/actions';
 import { getSelectedPostSelector } from '../../store/selectors';
-import { AddCommentForm } from '../AddCommentForm';
+import { AddNewComment } from '../AddNewComment';
 import './PostDetails.scss';
 
 type Props = {
@@ -112,7 +112,7 @@ export const PostDetails: React.FC<Props> = ({ getPostsDetails }) => {
           <li key={comment.body} className="box">{comment.body}</li>
         ))}
       </ul>
-      {isAddCommentsVisible && <AddCommentForm addComment={addComment} />}
+      {isAddCommentsVisible && <AddNewComment addComment={addComment} />}
       <div className="buttons">
         <button
           type="button"

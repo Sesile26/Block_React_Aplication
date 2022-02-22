@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { getPostById } from './api/posts';
 import './App.scss';
-import { AddPostForm } from './components/AddPostForm/AddPostForm';
+import { AddNewPost } from './components/AddNewPost/AddNewPost';
 import { PostDetails } from './components/PostDetails/PostDetails';
 import { PostList } from './components/PostList';
 import { LoadSelectedPostAction } from './store/actions';
@@ -24,7 +24,7 @@ const App: React.FC = () => {
         </div>
         <div className="column">
           <PostDetails getPostsDetails={getPostsDetails} />
-          <AddPostForm />
+          <AddNewPost />
         </div>
       </div>
     </div>
