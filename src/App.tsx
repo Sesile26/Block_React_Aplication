@@ -1,27 +1,34 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { getPostById } from './api/posts';
 import './App.scss';
+import { AddPostForm } from './components/AddPostForm/AddPostForm';
+import { PostDetails } from './components/PostDetails/PostDetails';
+import { PostList } from './components/PostList';
+import { LoadSelectedPostAction } from './store/actions';
 
-interface Props {
-  onClick: () => void;
-}
+const App: React.FC = () => {
+  const dispatch = useDispatch();
 
-export const Provider: React.FC<Props> = React.memo(
-  ({ onClick, children }) => (
-    <button
-      type="button"
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  ),
-);
+  const getPostsDetails = async (postId: number) => {
+    const selectedPostFromServer = await getPostById(postId);
 
-export const App: React.FC = () => {
+    dispatch(LoadSelectedPostAction(selectedPostFromServer));
+  };
+
   return (
-    <div className="starter">
-      <Provider onClick={() => ({})}>
-        <TodoList />
-      </Provider>
+    <div className="App">
+      <div className="columns">
+        <div className="column">
+          <PostList getPostsDetails={getPostsDetails} />
+        </div>
+        <div className="column">
+          <PostDetails getPostsDetails={getPostsDetails} />
+          <AddPostForm />
+        </div>
+      </div>
     </div>
   );
 };
+
+export default App;
